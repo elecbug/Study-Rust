@@ -1,5 +1,5 @@
 [package]
-name = "p02_string"
+name = "p03_password"
 version = "0.1.0"
 edition = "2021"
 
