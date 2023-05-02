@@ -1,69 +1,85 @@
-pub mod linked_list {
+#[derive(Clone)]
+pub enum Address {
+    Address(Box<MyList>),
+    Nil,
+}
 
-    struct Node<T> {
-        value: Option<T>,
-        next: Option<Box<Node<T>>>,
-    }
+#[derive(Clone)]
+pub struct MyList {
+    pub value: u32,
+    pub next: Address,
+}
 
-    impl<T> Node<T> {
-        fn new() -> Node<T> {
-            Node {
-                value: None,
-                next: None,
+impl MyList {
+    pub fn append(&mut self, elem: u32) {
+        match self.next {
+            Address::Address(ref mut next_address) => {
+                next_address.append(elem);
+            }
+            Address::Nil => {
+                let node = MyList {
+                    value: elem,
+                    next: Address::Nil,
+                };
+                self.next = Address::Address(Box::new(node))
             }
         }
-
-        fn push(before: &mut Node<T>) -> Node<T> {
-            let result = move || Node {
-                value: None,
-                next: None,
-            };
-            before.next = Some(Box::new(result()));
-
-            result()
-        }
     }
-
-    pub struct List<T> {
-        head: Node<T>,
-        tail: Node<T>,
-        len: u32,
-    }
-
-    impl<T> List<T> {
-        pub fn new() -> List<T> {
-            let mut head = Node::<T>::new();
-            let tail = Node::<T>::push(&mut head);
-            List {
-                head,
-                tail,
-                len: 0,
+    
+    pub fn delete(&mut self, elem: u32) {
+        match self.next {
+            Address::Address(ref mut next_address) => {
+                if next_address.value == elem {
+                    println!("Deleting value {}", next_address.value);
+                    self.next = next_address.next.clone();
+                } else {
+                    next_address.delete(elem);
+                }
+            }
+            Address::Nil => {
+                if self.value == elem {
+                    self.value = 0;
+                } else {
+                    println!("Element {} does not exist in the linked list", elem);
+                }
             }
         }
+    }
 
-        fn at_before_node(&self, index: u32) -> Option<Box<&Node<T>>> {
-            let mut now = Some(Box::new(&self.head));
-            for _i  in [0..index] {
-                now = Some(*Box::new(now.unwrap()));
-            };
-
-            now
+    pub fn count(&self) -> u32 {
+        match self.next {
+            Address::Address(ref newaddress) => 1 + newaddress.count(),
+            Address::Nil => 1,
         }
+    }
 
-        pub fn get_value(&self, index: u32) -> &Option<T> {
-            let now = self.at_before_node(index);
-            let now = Some(*Box::new(now.unwrap()));
-            let now = *now.unwrap();
-
-            &now.value
+    pub fn list(&self) {
+        if self.value == 0 {
+            println!("The list is empty")
+        } else {
+            println!("{}", self.value);
+            match self.next {
+                Address::Address(ref next_address) => next_address.list(),
+                Address::Nil => {}
+            }
         }
+    }
 
-        pub fn set_value(&self, index: u32, value: &Option<T>) {
-            let now = self.at_before_node(index);
-            let now = Some(*Box::new(now.unwrap()));
-            let now = *now.unwrap();
-            let mut _now = &now.value; 
-            _now = value;
+    pub fn update(&mut self, index: u32, elem: u32) {
+        let mut i = 0;
+        let mut j = self;
+        if i == index {
+            j.value = elem;
         }
+        while i < index {
+            // println!("{}", j.value);
+            match j.next {
+                Address::Address(ref mut next_address) => j = next_address,
+                Address::Nil => {}
+            }
+            i = i + 1;
+        }
+        j.value = elem;
     }
 }
+
