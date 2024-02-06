@@ -18,19 +18,25 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     eprintln!("failed to write to socket; err = {:?}", e);
                     return;
                 }
-                println!("count: {}", count);
 
                 let n = match socket.read(&mut buf).await {
                     Ok(n) if n == 0 => return,
                     Ok(n) => {
-                        println!("{}", match std::str::from_utf8(&buf) {
+                        let s = match std::str::from_utf8(&buf) {
                             Ok(v) => v,
                             Err(e) => {
                                 eprintln!("failed convert text; err = {:?}", e);
                                 return;
                             },
-                        });
+                        };
+
                         count += 1;
+
+                        if (count % 1000 == 0) {
+                            println!("{}", s);
+                            println!("count: {}", count);
+                        }
+
                         continue;
                     },
                     Err(e) => {
