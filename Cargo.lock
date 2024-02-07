@@ -1404,17 +1404,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "libp2p-test02"
-version = "0.1.0"
-dependencies = [
- "futures",
- "libp2p",
- "tokio",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
 name = "libp2p-tls"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1477,6 +1466,17 @@ dependencies = [
 
 [[package]]
 name = "libp2p_test01"
+version = "0.1.0"
+dependencies = [
+ "futures",
+ "libp2p",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "libp2p_test02"
 version = "0.1.0"
 dependencies = [
  "futures",
