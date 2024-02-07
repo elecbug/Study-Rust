@@ -1,5 +1,5 @@
 [package]
-name = "libp2p-test02"
+name = "libp2p_test02"
 version = "0.1.0"
 edition = "2021"
 
