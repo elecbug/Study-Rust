@@ -21,7 +21,7 @@ fn read_username_from_file2() -> Result<String, io::Error> {
     let mut username_file = File::open("hello.txt")?;
     let mut username = String::new();
     username_file.read_to_string(&mut username);
-    Ok(username);
+    Ok(username)
 }
 
 fn main() {

@@ -13,6 +13,6 @@ fn main() {
     let f: bool = false;
 
     let c = 'z';
-    let z: char = "Z";
+    // let z: char = "Z";
     let heart_eyed_cat = '�';
 }
