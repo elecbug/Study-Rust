@@ -1487,6 +1487,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "libp2p_test03"
+version = "0.1.0"
+dependencies = [
+ "futures",
+ "libp2p",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "lifetime"
 version = "0.1.0"
 
