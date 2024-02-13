@@ -113,7 +113,7 @@ fn create_swarm() -> Swarm<ping::Behaviour> {
     build
 }
 
-fn default_setting() -> Result<(), Box<dyn Error + Send + Sync + 'static>>{
+fn default_setting() -> Result<(), Box<dyn Error + Send + Sync + 'static>> {
     tracing_subscriber::fmt()
         .with_env_filter(EnvFilter::from_default_env())
         .try_init()
