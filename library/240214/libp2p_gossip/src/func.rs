@@ -6,6 +6,12 @@ use tracing_subscriber::EnvFilter;
 
 use crate::log;
 
+#[derive(NetworkBehaviour)]
+pub struct GossipBehaviour {
+    pub gossipsub: gossipsub::Behaviour,
+    pub mdns: mdns::tokio::Behaviour,
+}
+
 pub fn init_setting() {
     tracing_subscriber::fmt()
         .with_env_filter(EnvFilter::from_default_env())
@@ -13,10 +19,19 @@ pub fn init_setting() {
         .expect("Can not initial setting");
 }
 
-#[derive(NetworkBehaviour)]
-pub struct GossipBehaviour {
-    pub gossipsub: gossipsub::Behaviour,
-    pub mdns: mdns::tokio::Behaviour,
+pub fn listen_swarm(swarm: &mut Swarm<GossipBehaviour>, protocol: &str) {
+    swarm.listen_on(
+        format!("/ip4/0.0.0.0/{protocol}")
+            .parse()
+            .expect("Address is not parsing")
+    )
+    .expect("Swarm is not listening");
+}
+
+pub fn subscribe_topic(swarm: &mut Swarm<GossipBehaviour>, topic: &str) {
+    swarm.behaviour_mut().gossipsub
+        .subscribe(&gossipsub::IdentTopic::new(topic))
+        .expect("Swarm is not subscribe to topic");
 }
 
 pub fn create_gossip_swarm() -> Swarm<GossipBehaviour> {
@@ -62,7 +77,7 @@ pub fn create_gossip_swarm() -> Swarm<GossipBehaviour> {
         .build()
 }
 
-pub async fn select_loop(swarm: &mut Swarm<GossipBehaviour>, topic: &str) {
+pub async fn select_loop(swarm: &mut Swarm<GossipBehaviour>,  topic: &str) {
     let mut stdin = io::BufReader::new(io::stdin()).lines();
     let topic = gossipsub::IdentTopic::new(topic);
     let log_file = "./log.txt";
@@ -72,7 +87,7 @@ pub async fn select_loop(swarm: &mut Swarm<GossipBehaviour>, topic: &str) {
             Ok(Some(line)) = stdin.next_line() => {
                 match swarm.behaviour_mut().gossipsub.publish(topic.clone(), line.as_bytes()) {
                     Ok(id) => {
-                        log::write_log(log_file, &format!("Publish data: {line} with id: {id}"));
+                        log::append_log(log_file, None, &format!("Publish ID: {id} Data: {line}"));
                     },
                     Err(e) => println!("Publish error: {e:?}"),
                 }
@@ -80,7 +95,7 @@ pub async fn select_loop(swarm: &mut Swarm<GossipBehaviour>, topic: &str) {
             event = swarm.select_next_some() => match event {
                 SwarmEvent::Behaviour(GossipBehaviourEvent::Mdns(mdns::Event::Discovered(list))) => {
                     for (peer_id, _multiaddr) in list {
-                        log::write_log(log_file, &format!("mDNS discovered a new peer: {peer_id}"));
+                        log::append_log(log_file, None, &format!("mDNS discovered a new peer: {peer_id}"));
 
                         println!("mDNS discovered a new peer: {peer_id}");
                         swarm.behaviour_mut().gossipsub.add_explicit_peer(&peer_id);
@@ -88,7 +103,7 @@ pub async fn select_loop(swarm: &mut Swarm<GossipBehaviour>, topic: &str) {
                 },
                 SwarmEvent::Behaviour(GossipBehaviourEvent::Mdns(mdns::Event::Expired(list))) => {
                     for (peer_id, _multiaddr) in list {
-                        log::write_log(log_file, &format!("mDNS discovered a new peer: {peer_id}"));
+                        log::append_log(log_file, None, &format!("mDNS discovered peer has expired: {peer_id}"));
 
                         println!("mDNS discover peer has expired: {peer_id}");
                         swarm.behaviour_mut().gossipsub.remove_explicit_peer(&peer_id);
@@ -99,9 +114,7 @@ pub async fn select_loop(swarm: &mut Swarm<GossipBehaviour>, topic: &str) {
                     message_id: id,
                     message,
                 })) => {
-                    log::write_log(log_file, &format!(
-                        "Got message: '{}' with id: {id} from peer: {peer_id}",
-                        String::from_utf8_lossy(&message.data)));
+                    log::append_log(log_file, Some(peer_id), &format!("ID: {id} Data: {}", &String::from_utf8_lossy(&message.data)));
 
                     println!(
                         "Got message: '{}' with id: {id} from peer: {peer_id}",
@@ -109,7 +122,7 @@ pub async fn select_loop(swarm: &mut Swarm<GossipBehaviour>, topic: &str) {
                     )
                 },
                 SwarmEvent::NewListenAddr { address, .. } => {
-                    log::write_log(log_file, &format!("Local node is listening on {address}"));
+                    log::append_log(log_file, None, &format!("Local node is listening on {address}"));
 
                     println!("Local node is listening on {address}");
                 }

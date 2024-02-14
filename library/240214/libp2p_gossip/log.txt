@@ -1,0 +1,68 @@
+[2024-02-14 11:08:51.642367300 +09:00]
+	Data: Local node is listening on /ip4/210.125.31.243/tcp/52692
+[2024-02-14 11:08:51.642961700 +09:00]
+	Data: Local node is listening on /ip4/127.0.0.1/tcp/52692
+[2024-02-14 11:08:51.643770200 +09:00]
+	Data: Local node is listening on /ip4/210.125.31.243/udp/55798/quic-v1
+[2024-02-14 11:08:51.644014400 +09:00]
+	Data: Local node is listening on /ip4/127.0.0.1/udp/55798/quic-v1
+[2024-02-14 11:09:02.175522100 +09:00]
+	Data: Local node is listening on /ip4/210.125.31.243/tcp/52693
+[2024-02-14 11:09:02.176006900 +09:00]
+	Data: Local node is listening on /ip4/127.0.0.1/tcp/52693
+[2024-02-14 11:09:02.176652300 +09:00]
+	Data: Local node is listening on /ip4/210.125.31.243/udp/63787/quic-v1
+[2024-02-14 11:09:02.176876600 +09:00]
+	Data: Local node is listening on /ip4/127.0.0.1/udp/63787/quic-v1
+[2024-02-14 11:09:02.180668600 +09:00]
+	Data: mDNS discovered a new peer: 12D3KooWH3tsVdq3us5jqx45ucZaGcS4ACADWTubCBgz4CsW3VK5
+[2024-02-14 11:09:02.180738100 +09:00]
+	Data: mDNS discovered a new peer: 12D3KooWNDG5DcWVSQKj2no9rL13AbuX1HnbMu9R7sDic4UXjVQ8
+[2024-02-14 11:09:02.181048800 +09:00]
+	Data: mDNS discovered a new peer: 12D3KooWH3tsVdq3us5jqx45ucZaGcS4ACADWTubCBgz4CsW3VK5
+[2024-02-14 11:09:02.181175 +09:00]
+	Data: mDNS discovered a new peer: 12D3KooWNDG5DcWVSQKj2no9rL13AbuX1HnbMu9R7sDic4UXjVQ8
+[2024-02-14 11:09:21.290751400 +09:00]
+	Data: Publish ID: 39373534303033343032313334353339393332 Data: hello
+[2024-02-14 11:09:21.300771200 +09:00]
+	Target: 12D3KooWH3tsVdq3us5jqx45ucZaGcS4ACADWTubCBgz4CsW3VK5
+	Data: ID: 39373534303033343032313334353339393332 Data: hello
+[2024-02-14 11:10:54.392438200 +09:00]
+	- Local node is listening on /ip4/210.125.31.243/tcp/52711
+[2024-02-14 11:10:54.393019200 +09:00]
+	- Local node is listening on /ip4/127.0.0.1/tcp/52711
+[2024-02-14 11:10:54.393758200 +09:00]
+	- Local node is listening on /ip4/210.125.31.243/udp/57152/quic-v1
+[2024-02-14 11:10:54.394012 +09:00]
+	- Local node is listening on /ip4/127.0.0.1/udp/57152/quic-v1
+[2024-02-14 11:10:57.549682600 +09:00]
+	- Local node is listening on /ip4/210.125.31.243/tcp/52712
+[2024-02-14 11:10:57.550481400 +09:00]
+	- Local node is listening on /ip4/127.0.0.1/tcp/52712
+[2024-02-14 11:10:57.551318200 +09:00]
+	- Local node is listening on /ip4/210.125.31.243/udp/53462/quic-v1
+[2024-02-14 11:10:57.551573900 +09:00]
+	- Local node is listening on /ip4/127.0.0.1/udp/53462/quic-v1
+[2024-02-14 11:10:57.560656300 +09:00]
+	- mDNS discovered a new peer: 12D3KooWS6GGpEUQtvhHfiS8Um5GJUc4L9xHEux1iTtpmSDCBwxT
+[2024-02-14 11:10:57.560654400 +09:00]
+	- mDNS discovered a new peer: 12D3KooWJXa1vyUz7daH9jMk8Whattdh3u59jqKGCf5MJFERiiE1
+[2024-02-14 11:10:57.561050200 +09:00]
+	- mDNS discovered a new peer: 12D3KooWS6GGpEUQtvhHfiS8Um5GJUc4L9xHEux1iTtpmSDCBwxT
+[2024-02-14 11:10:57.561075 +09:00]
+	- mDNS discovered a new peer: 12D3KooWJXa1vyUz7daH9jMk8Whattdh3u59jqKGCf5MJFERiiE1
+[2024-02-14 11:10:59.429207900 +09:00]
+	- Publish ID: 39373534303033343032313334353339393332 Data: hello
+[2024-02-14 11:10:59.438583200 +09:00]
+	Target: 12D3KooWS6GGpEUQtvhHfiS8Um5GJUc4L9xHEux1iTtpmSDCBwxT
+	Data: ID: 39373534303033343032313334353339393332 Data: hello
+[2024-02-14 11:11:01.001963400 +09:00]
+	- Publish ID: 3135343637343731313937333736353336313636 Data: world
+[2024-02-14 11:11:01.011288800 +09:00]
+	Target: 12D3KooWS6GGpEUQtvhHfiS8Um5GJUc4L9xHEux1iTtpmSDCBwxT
+	Data: ID: 3135343637343731313937333736353336313636 Data: world
+[2024-02-14 11:11:02.505230300 +09:00]
+	- Publish ID: 3133343636313137333832383135373435383032 Data: lol
+[2024-02-14 11:11:02.513374500 +09:00]
+	Target: 12D3KooWS6GGpEUQtvhHfiS8Um5GJUc4L9xHEux1iTtpmSDCBwxT
+	Data: ID: 3133343636313137333832383135373435383032 Data: lol
