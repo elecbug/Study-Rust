@@ -2131,14 +2131,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "html_view"
-version = "0.1.0"
-dependencies = [
- "actix-web",
- "yew 0.21.0",
-]
-
-[[package]]
 name = "http"
 version = "0.2.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
