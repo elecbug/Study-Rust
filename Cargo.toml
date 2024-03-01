@@ -3,4 +3,5 @@
 members = [
     "tutorial/*/*",
     "library/*/*",
+    "backend/*/*",
 ]
